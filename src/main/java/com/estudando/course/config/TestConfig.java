@@ -36,9 +36,9 @@ public class TestConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Category cat1 = new Category(null, "Electronics");
-		Category cat2 = new Category(null, "Books");
-		Category cat3 = new Category(null, "Computers");
+		Category eletronics = new Category(null, "Electronics");
+		Category books = new Category(null, "Books");
+		Category computers = new Category(null, "Computers");
 
 		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
 		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
@@ -46,8 +46,18 @@ public class TestConfig implements CommandLineRunner {
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
-		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		categoryRepository.saveAll(Arrays.asList(eletronics, books, computers));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
+		eletronics.getProducts().add(p2);
+		computers.getProducts().add(p2);
+		books.getProducts().add(p1);
+		computers.getProducts().add(p3);
+		computers.getProducts().add(p4);
+		books.getProducts().add(p5);
+		
+		categoryRepository.saveAll(Arrays.asList(eletronics, books, computers));
+		
 
 		User u1 = new User(null, "Lucas Aranha", "lucas@gmail.com", "2121221", "7654321");
 		User u2 = new User(null, "Renato Aranha", "renato@gmail.com", "7657575", "126347");
